@@ -8,14 +8,14 @@ from model.metrics.mixins import EmbeddingRegularizerMixin
 class BaseMetricLossFunction(
     EmbeddingRegularizerMixin, ModuleWithRecordsReducerAndDistance
 ):
-    def compute_loss(self, embeddings, labels, indices_tuple, ref_emb, ref_labels, c, P):
+    def compute_loss(self, embeddings, labels, indices_tuple, ref_emb, ref_labels, c):
         """
         This has to be implemented and is what actually computes the loss.
         """
         raise NotImplementedError
 
     def forward(
-        self, embeddings, labels=None, indices_tuple=None, ref_emb=None, ref_labels=None, c=None, P=None
+        self, embeddings, labels=None, indices_tuple=None, ref_emb=None, ref_labels=None, c=None
     ):
         """
         Args:
@@ -32,7 +32,7 @@ class BaseMetricLossFunction(
             labels = c_f.to_device(labels, embeddings)
         ref_emb, ref_labels = c_f.set_ref_emb(embeddings, labels, ref_emb, ref_labels)
         loss_dict = self.compute_loss(
-            embeddings, labels, indices_tuple, ref_emb, ref_labels, c, P
+            embeddings, labels, indices_tuple, ref_emb, ref_labels, c
         )
         self.add_embedding_regularization_to_loss_dict(loss_dict, embeddings)
         return self.reducer(loss_dict, embeddings, labels)
