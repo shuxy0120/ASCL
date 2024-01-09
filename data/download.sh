@@ -1,8 +1,3 @@
-# GloVe Vectors
-wget -P ./ http://nlp.stanford.edu/data/glove.6B.zip
-unzip ./glove.6B.zip -d data/glove
-rm ./glove.6B.zip
-
 # VQA-CP2
 wget -P ./ https://computing.ece.vt.edu/~aish/vqacp/vqacp_v2_train_annotations.json
 wget -P ./ https://computing.ece.vt.edu/~aish/vqacp/vqacp_v2_test_annotations.json
