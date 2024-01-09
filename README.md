@@ -18,6 +18,8 @@ python compute_softscore.py cp_v2
 cd ..
 ```
 
-the rest data and trained model can also be obtained from [BaiduYun](https://pan.baidu.com/s/1dR-IDEW3dIggVWzq4b3r0g )(passwd:uglj) 
+the data can also be obtained from [BaiduYun](https://pan.baidu.com/s/11ggV8LD7lmtCsFITSYNMCg)(passwd:et10) 
 
 unzip rcnn_features.zip into data/rcnn/
+
+the trained model can be obtained from [BaiduYun](https://pan.baidu.com/s/1MDQwhW40JyGScTBWboD91w)(passwd:6eh9) 
