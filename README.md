@@ -1,7 +1,7 @@
 # ASCL: Adaptive Self-supervised Counterfactual Learning for Robust Visual Question Answering
 ## Prerequisites
 
-- python 3.7.15
+- python 3.7
 - pytorch 1.9.1
 - pytorch-metric-learning 2.1.0
 - tdqm
