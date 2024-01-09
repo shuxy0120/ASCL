@@ -21,7 +21,7 @@ cd ..
 the data can also be obtained from [BaiduYun](https://pan.baidu.com/s/11ggV8LD7lmtCsFITSYNMCg)(passwd:et10) 
 
 ```
-unzip rcnn_features.zip into rcnn/
+unzip rcnn_features.zip into data/rcnn/
 ```
 
 the trained model can be obtained from [BaiduYun](https://pan.baidu.com/s/1MDQwhW40JyGScTBWboD91w)(passwd:6eh9) 
