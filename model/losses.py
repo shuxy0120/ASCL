@@ -4,6 +4,8 @@ import torch.nn.functional as F
 import math
 import random
 from pytorch_metric_learning import miners, losses
+from model.metrics.contrastive_loss import ContrastiveLoss as ContrastiveLoss_new
+
 
 def binarize(T, nb_classes):
     T = T.cpu().numpy()
@@ -27,19 +29,18 @@ class Proxy_Anchor(torch.nn.Module):
     def __init__(self, nb_classes, sz_embed, mrg = 0.1, alpha = 32):
         torch.nn.Module.__init__(self)
         # Proxy Anchor Initialization
-        # self.proxies = torch.nn.Parameter(torch.randn(nb_classes, sz_embed).cuda())
-        # nn.init.kaiming_normal_(self.proxies, mode='fan_out')
+        self.proxies = torch.nn.Parameter(torch.randn(nb_classes, sz_embed).cuda())
+        nn.init.kaiming_normal_(self.proxies, mode='fan_out')
 
         self.nb_classes = nb_classes
-        # self.sz_embed = sz_embed
+        self.sz_embed = sz_embed
         self.mrg = mrg
         self.alpha = alpha
         
-    def forward(self, X, T, P):
-        # P = self.proxies
+    def forward(self, X, T):
+        P = self.proxies
 
-        # cos = F.linear(l2_norm(X), l2_norm(P))  # Calcluate cosine similarity
-        cos = torch.matmul(l2_norm(X), l2_norm(P).T)
+        cos = F.linear(l2_norm(X), l2_norm(P))  # Calcluate cosine similarity
         P_one_hot = binarize(T = T, nb_classes = self.nb_classes)
         N_one_hot = 1 - P_one_hot
     
@@ -92,7 +93,7 @@ class ContrastiveLoss(nn.Module):
     def __init__(self, margin=0.5, **kwargs):
         super(ContrastiveLoss, self).__init__()
         self.margin = margin
-        self.loss_func = losses.ContrastiveLoss(neg_margin=self.margin) 
+        self.loss_func = ContrastiveLoss_new(neg_margin=self.margin) 
         
     def forward(self, embeddings, labels, c=None):
         loss = self.loss_func(embeddings, labels, c=c)
